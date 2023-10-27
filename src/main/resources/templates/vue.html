@@ -39,7 +39,7 @@
             <td th:text="${p.categorie.nom}"></td>
             <td>
                <a th:href="@{'/delete/'+${p.id}}" class="btn btn-danger fa fa-trash"></a>
-                <a href="" class="btn btn-warning fa fa-edit"></a>
+                <a th:href="@{/edit/{id}(id=${p.id})}" class="btn btn-warning fa fa-edit"></a>
             </td>
         </tr>
         </tbody>

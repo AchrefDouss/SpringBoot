@@ -44,4 +44,12 @@ public class ProduitControlleur {
         serviceProduit.saveProduct(p);
         return "redirect:/index";
     }
+
+    @GetMapping("/edit/{id}")
+    public String editProduct(@PathVariable Long id , Model m){
+        m.addAttribute("produit", serviceProduit.getProduct(id));
+        m.addAttribute("categories" , serviceCategory.getAllCategories());
+        return "ajoutProd";
+
+    }
 }

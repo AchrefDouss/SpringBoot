@@ -17,27 +17,30 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="inputEmail4">Nom Produit</label>
-                        <input type="text" class="form-control" id="inputEmail4" placeholder="Nom Produit" name="nom">
+                        <input type="text" class="form-control" id="inputEmail4" placeholder="Nom Produit" name="nom" th:value="${produit.nom}">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="inputPassword4">Prix</label>
-                        <input type="currency" class="form-control" id="inputPassword4" name="prix" placeholder="Prix">
+                        <input type="currency" class="form-control" id="inputPassword4" name="prix" placeholder="Prix" th:value="${produit.prix}">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputAddress">Quantité</label>
-                    <input type="text" class="form-control" id="inputAddress" placeholder="Quantite">
+                    <input type="text" class="form-control" id="inputAddress" name="quantite" placeholder="Quantite" th:value="${produit.quantite}">
                 </div>
                 <div class="form-group">
                     <div class="col-auto my-1">
                         <label class="mr-sm-2" for="inlineFormCustomSelect">Categories</label>
                         <select class="custom-select mr-sm-2" name="categorie"id="inlineFormCustomSelect">
-                            <option th:each="c:${categories}" th:text="${c.nom}" th:value="${c.id}"></option>
+                            <option th:each="c:${categories}" th:text="${c.nom}" th:value="${c.id}"
+                            th:selected="${produit.categorie!=null && produit.categorie.id== c.id}"></option>
                         </select>
                     </div>
                 </div>
                 <div class="form-group">
                 </div>
+                <br>
+                <input type="hidden" name="id" th:value="${produit.id}">
                 <button type="submit" class="btn btn-primary">Ajouter</button>
             </form>
         </div>
