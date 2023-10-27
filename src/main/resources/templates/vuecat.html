@@ -8,7 +8,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/fontawesome.min.css" integrity="sha512-siarrzI1u3pCqFG2LEzi87McrBmq6Tp7juVsdmGY1Dr8Saw+ZBAzDzrGwX3vgxX1NkioYNCFOVC0GpDPss10zQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
+
 <div class="container mt-5">
+    <a href="/formcategorie" class="btn btn-success fa fa-plus float-right"></a>
     <div class="mb-4">
         <form class="form-inline" action="/index2">
             <div class="form-group mx-sm-3 mb-2">
@@ -32,7 +34,7 @@
             <td>
 
                 <a th:href="@{'/deleteCat/'+${c.id}}" class="btn btn-danger fa fa-trash"></a>
-                <a href="" class="btn btn-warning fa fa-edit"></a>
+                <a th:href="@{/editcat/{id}(id=${c.id})}" class="btn btn-warning fa fa-edit"></a>
             </td>
         </tr>
         </tbody>
