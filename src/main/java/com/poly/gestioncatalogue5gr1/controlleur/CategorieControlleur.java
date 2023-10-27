@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -15,9 +17,16 @@ public class CategorieControlleur {
     private IServiceCategory serviceCategory;
 
     @GetMapping("/index2")
-    public String getAllCategories(Model m){
-        List<Categorie> liste = serviceCategory.getAllCategories();
+    public String getAllCategories(Model m, @RequestParam(name="mc",defaultValue = "") String mc){
+        List<Categorie> liste = serviceCategory.getCategoriesByMC(mc);
         m.addAttribute("categories",liste);
         return "vuecat";
     }
+    @GetMapping("/deleteCat/{id}")
+    public String deleteCategory(@PathVariable("id") Long id){
+        serviceCategory.deleteCategorie(id);
+        return "redirect:/index2";
+    }
+
+
 }

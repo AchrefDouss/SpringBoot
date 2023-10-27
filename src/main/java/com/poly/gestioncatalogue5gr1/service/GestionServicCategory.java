@@ -26,6 +26,7 @@ public class GestionServicCategory implements IServiceCategory{
         return categorieRepository.findByNomContains(mc);
     }
 
+
     @Override
     public void deleteCategorie(Long id) {
         categorieRepository.deleteById(id);

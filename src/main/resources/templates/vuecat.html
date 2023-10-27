@@ -4,9 +4,18 @@
     <meta charset="UTF-8">
     <title>Categories List</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/fontawesome.min.css" integrity="sha512-siarrzI1u3pCqFG2LEzi87McrBmq6Tp7juVsdmGY1Dr8Saw+ZBAzDzrGwX3vgxX1NkioYNCFOVC0GpDPss10zQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
 <div class="container mt-5">
+    <div class="mb-4">
+        <form class="form-inline" action="/index2">
+            <div class="form-group mx-sm-3 mb-2">
+                <input type="text" class="form-control" id="searchInput" placeholder="Search" name="mc">
+            </div>
+            <button type="submit" class="btn btn-primary mb-2 fa fa-search"></button>
+        </form>
+    </div>
     <table class="table table-striped">
         <thead class="thead-dark">
         <tr>
@@ -20,7 +29,9 @@
             <td th:text="${rowStat.index + 1}"></td>
             <td th:text="${c.nom}"></td>
             <td>
-                <button class="btn btn-danger" onclick="deleteCategory(${c.id})">Delete</button>
+
+                <a th:href="@{'/deleteCat/'+${c.id}}" class="btn btn-danger fa fa-trash"></a>
+                <a href="" class="btn btn-warning fa fa-edit"></a>
             </td>
         </tr>
         </tbody>

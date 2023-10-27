@@ -4,13 +4,13 @@ package com.poly.gestioncatalogue5gr1;
 import com.poly.gestioncatalogue5gr1.dao.CategorieRepository;
 import com.poly.gestioncatalogue5gr1.dao.ProduitRepository;
 import com.poly.gestioncatalogue5gr1.entities.Categorie;
-import com.poly.gestioncatalogue5gr1.entities.Produit;
+
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
+
 
 @SpringBootApplication
 @AllArgsConstructor
