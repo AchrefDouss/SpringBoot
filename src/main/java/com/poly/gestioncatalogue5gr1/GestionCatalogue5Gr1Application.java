@@ -23,7 +23,6 @@ public class GestionCatalogue5Gr1Application implements CommandLineRunner{
         SpringApplication.run(GestionCatalogue5Gr1Application.class, args);    }
     @Override
     public void run(String... args) throws Exception {
-        categorieRepository.save(new Categorie(null,"informatique",null));
-        categorieRepository.save(Categorie.builder().nom("electronique").build());
+
     }
 }

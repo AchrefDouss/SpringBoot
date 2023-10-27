@@ -5,11 +5,10 @@ import com.poly.gestioncatalogue5gr1.entities.Produit;
 import com.poly.gestioncatalogue5gr1.service.IServiceCategory;
 import com.poly.gestioncatalogue5gr1.service.IServiceProduit;
 import lombok.AllArgsConstructor;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -35,7 +34,14 @@ public class ProduitControlleur {
 
 
         m.addAttribute("categories",serviceCategory.getAllCategories());
-
+        m.addAttribute("produit",new Produit());
         return "ajoutProd";
+    }
+
+    @GetMapping("/save")
+    public String saveProduct(@ModelAttribute Produit p,Model m)
+    {
+        serviceProduit.saveProduct(p);
+        return "redirect:/index";
     }
 }

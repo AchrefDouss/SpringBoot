@@ -4,37 +4,45 @@
     <meta charset="UTF-8">
     <title>Ajout Produit</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/fontawesome.min.css" integrity="sha512-siarrzI1u3pCqFG2LEzi87McrBmq6Tp7juVsdmGY1Dr8Saw+ZBAzDzrGwX3vgxX1NkioYNCFOVC0GpDPss10zQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
 </head>
 <body>
-<form>
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            <label for="inputEmail4">Nom Produit</label>
-            <input type="text" class="form-control" id="inputEmail4" placeholder="Nom Produit" name="nom">
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h1 class="text-center">Ajout Produit</h1>
+
+            <form th:action="@{/save}">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputEmail4">Nom Produit</label>
+                        <input type="text" class="form-control" id="inputEmail4" placeholder="Nom Produit" name="nom">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">Prix</label>
+                        <input type="currency" class="form-control" id="inputPassword4" name="prix" placeholder="Prix">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputAddress">Quantité</label>
+                    <input type="text" class="form-control" id="inputAddress" placeholder="Quantite">
+                </div>
+                <div class="form-group">
+                    <div class="col-auto my-1">
+                        <label class="mr-sm-2" for="inlineFormCustomSelect">Categories</label>
+                        <select class="custom-select mr-sm-2" name="categorie"id="inlineFormCustomSelect">
+                            <option th:each="c:${categories}" th:text="${c.nom}" th:value="${c.id}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                </div>
+                <button type="submit" class="btn btn-primary">Ajouter</button>
+            </form>
         </div>
-        <div class="form-group col-md-6">
-            <label for="inputPassword4">Prix</label>
-            <input type="currency" class="form-control" id="inputPassword4" name="prix" placeholder="Prix">
-        </div>
     </div>
-    <div class="form-group">
-        <label for="inputAddress">Quantité</label>
-        <input type="text" class="form-control" id="inputAddress" placeholder="Quantite">
-    </div>
-    <div class="form-group">
-        <div class="col-auto my-1">
-            <label class="mr-sm-2" for="inlineFormCustomSelect">Categories</label>
-            <select class="custom-select mr-sm-2" name="categorie"id="inlineFormCustomSelect">
-                <option th:each="c:${categories}" th:text="${c.nom}" th:value="${c.id}"></option>
-            </select>
-        </div>
-    </div>
-    <div class="form-group">
-    </div>
-    <button type="submit" class="btn btn-primary">Ajouter</button>
-</form>
+</div>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
