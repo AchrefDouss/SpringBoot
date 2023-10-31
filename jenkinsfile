@@ -1,0 +1,24 @@
+pipeline {
+    agent any
+    triggers {
+        pollSCM('* * * * *')
+    }
+    stages {
+        stage('Checkout'){
+          steps {
+            echo "Récuperation du code source"
+            checkout scm
+        }
+    }
+         stage('Build') {
+          steps {
+            echo "Build du projet"
+        }
+    }
+         stage('Deploy') {
+         steps {
+            echo "Deploiement du projet"
+        }
+    }
+}
+}
