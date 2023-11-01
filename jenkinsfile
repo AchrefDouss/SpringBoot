@@ -14,7 +14,7 @@ pipeline {
             steps {
                 echo "Build du projet"
 
-                sh './mvnw clean package'
+               // sh './mvnw clean package'
             }
         }
         stage('Deploy') {
@@ -22,7 +22,7 @@ pipeline {
                 echo "Déploiement du projet"
 
                 // Commandes de déploiement pour un projet Spring Boot
-                sh 'java -jar target/gestionCatalogue5Gr1.jar'
+               // sh 'java -jar target/gestionCatalogue5Gr1.jar'
             }
         }
     }
