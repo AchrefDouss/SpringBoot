@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Main-Class: com.poly.gestioncatalogue5gr1.GestionCatalogue5Gr1Applicatio
+ n
+

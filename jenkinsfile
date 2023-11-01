@@ -1,24 +1,29 @@
 pipeline {
     agent any
     triggers {
-        pollSCM('* * * * *')
+        pollSCM('*/5 * * * *') // Vérifier toutes les 5 minutes
     }
     stages {
-        stage('Checkout'){
-          steps {
-            echo "Récuperation du code source"
-            checkout scm
+        stage('Checkout') {
+            steps {
+                echo "Récupération du code source"
+                checkout scm
+            }
+        }
+        stage('Build') {
+            steps {
+                echo "Build du projet"
+
+                sh './mvnw clean package'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo "Déploiement du projet"
+
+                // Commandes de déploiement pour un projet Spring Boot
+                sh 'java -jar target/gestionCatalogue5Gr1.jar'
+            }
         }
     }
-         stage('Build') {
-          steps {
-            echo "Build du projet"
-        }
-    }
-         stage('Deploy') {
-         steps {
-            echo "Deploiement du projet"
-        }
-    }
-}
 }
