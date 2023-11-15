@@ -4,6 +4,8 @@ import com.poly.gestioncatalogue5gr1.dao.ProduitRepository;
 import com.poly.gestioncatalogue5gr1.entities.Produit;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,8 +26,8 @@ public class GestionServiceProduit implements IServiceProduit {
     }
 
     @Override
-    public List<Produit> getProductsByMC(String mc) {
-        return produitRepository.findByNomContains(mc);
+    public Page<Produit> getProductsByMC(String mc, Pageable p) {
+        return produitRepository.findByNomContains(mc,p);
     }
 
     @Override

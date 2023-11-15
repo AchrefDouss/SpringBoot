@@ -6,6 +6,8 @@ import com.poly.gestioncatalogue5gr1.service.IServiceCategory;
 import com.poly.gestioncatalogue5gr1.service.IServiceProduit;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.Banner;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -19,9 +21,16 @@ public class ProduitControlleur {
     private IServiceCategory serviceCategory;
 
     @GetMapping("/index")
-    public String getAllProducts(Model m , @RequestParam(name = "mc",defaultValue = "") String mc){
-         List<Produit> liste = serviceProduit.getProductsByMC(mc);
-         m.addAttribute("produits",liste);
+    public String getAllProducts(Model m , @RequestParam(name = "page",defaultValue = "1") int page,
+    @RequestParam(name="size",defaultValue = "5")int size
+        ,@RequestParam(name = "mc",defaultValue = "")String mc){
+         Page<Produit> listePage = serviceProduit.getProductsByMC(mc, PageRequest.of(page-1,size));
+        m.addAttribute("data",listePage.getContent());
+        m.addAttribute("pages",new int [listePage.getTotalPages()]);
+        m.addAttribute("current",listePage.getNumber());
+
+         m.addAttribute("mc",mc);
+         m.addAttribute("produits", listePage);
         return "vue";
     }
     @GetMapping("/delete/{id}")

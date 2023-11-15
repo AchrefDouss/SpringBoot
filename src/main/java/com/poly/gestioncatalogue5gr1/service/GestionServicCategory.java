@@ -4,6 +4,8 @@ import com.poly.gestioncatalogue5gr1.dao.CategorieRepository;
 import com.poly.gestioncatalogue5gr1.entities.Categorie;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 @Service
@@ -22,7 +24,7 @@ public class GestionServicCategory implements IServiceCategory{
     }
 
     @Override
-    public List<Categorie> getCategoriesByMC(String mc) {
+    public List<Categorie> getCategoriesByMC(String mc ) {
         return categorieRepository.findByNomContains(mc);
     }
 

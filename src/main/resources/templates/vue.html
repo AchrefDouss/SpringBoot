@@ -57,7 +57,14 @@
             </td>
         </tr>
         </tbody>
+
     </table>
+    <ul class="nav nav-pills">
+        <li th:each="i,c:${pages}">
+            <a th:href="@{/index(page=${c.count},mc=${mc})}"
+               th:text="${c.count}" th:class="${current==c.count-1}?'btn btn-primary mx-2':'btn btn-outline-primary mx2'"></a>
+        </li>
+    </ul>
 </div>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
