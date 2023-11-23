@@ -4,10 +4,17 @@ import com.poly.gestioncatalogue5gr1.dao.ProduitRepository;
 import com.poly.gestioncatalogue5gr1.entities.Produit;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 @Service
 @AllArgsConstructor
@@ -15,7 +22,11 @@ public class GestionServiceProduit implements IServiceProduit {
 
      ProduitRepository produitRepository;
     @Override
-    public void saveProduct(Produit p) {
+    public void saveProduct(Produit p,MultipartFile mf) throws IOException {
+        if(!mf.isEmpty())
+            p.setPhoto(saveImage(mf));
+
+
         produitRepository.save(p);
     }
 
@@ -44,5 +55,15 @@ public class GestionServiceProduit implements IServiceProduit {
     @Override
     public Produit getProduct(Long id) {
         return produitRepository.findById(id).orElse(null);
+    }
+    private String saveImage(MultipartFile mf) throws IOException {
+        String nom=mf.getOriginalFilename();
+    String tab[]=nom.split("\\.");
+    String newName=tab[0]+System.currentTimeMillis()+"."+tab[1];
+        File f =new ClassPathResource("static/photo").getFile();
+        String chemin=f.getAbsolutePath();
+        Path p= Paths.get(chemin,newName);
+        Files.write(p,mf.getBytes());
+    return newName;
     }
 }

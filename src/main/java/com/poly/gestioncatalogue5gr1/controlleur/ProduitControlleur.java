@@ -4,14 +4,18 @@ import com.poly.gestioncatalogue5gr1.entities.Categorie;
 import com.poly.gestioncatalogue5gr1.entities.Produit;
 import com.poly.gestioncatalogue5gr1.service.IServiceCategory;
 import com.poly.gestioncatalogue5gr1.service.IServiceProduit;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.Banner;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -47,10 +51,14 @@ public class ProduitControlleur {
         return "ajoutProd";
     }
 
-    @GetMapping("/save")
-    public String saveProduct(@ModelAttribute Produit p,Model m)
-    {
-        serviceProduit.saveProduct(p);
+    @PostMapping("/save")
+    public String saveProduct(@Valid Produit p, BindingResult bindingResult, Model m, @RequestParam("f") MultipartFile mf) throws IOException {
+
+        if(bindingResult.hasErrors()){
+            m.addAttribute("categories",serviceCategory.getAllCategories());
+            return "ajoutProd";
+        }
+        serviceProduit.saveProduct(p,mf);
         return "redirect:/index";
     }
 

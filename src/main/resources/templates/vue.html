@@ -28,7 +28,7 @@
         <div class="mb-4">
             <form class="form-inline" action="/index">
                 <div class="form-group mx-sm-3 mb-2">
-                    <input type="text" class="form-control" id="searchInput" placeholder="Search" name="mc">
+                    <input type="text" class="form-control" id="searchInput" placeholder="Search" name="mc" th:value="${mc}">
                 </div>
                 <button type="submit" class="btn btn-primary mb-2 fas fa-search"></button>
             </form>
@@ -37,6 +37,7 @@
         <thead class="thead-dark">
         <tr>
             <th>#</th>
+            <th></th>
             <th>Name</th>
             <th>Price</th>
             <th>Quantity</th>
@@ -47,6 +48,12 @@
         <tbody>
         <tr th:each="p:${produits}">
             <td th:text="${p.id}"></td>
+            <td th:if="${p.photo==''|| p.photo==null}">
+                <img src="/photo/nondispo.jpeg" width="50" height="50">
+            </td>
+            <td th:unless="${p.photo==''|| p.photo==null}">
+                <img th:src="@{${'/photo/'+p.photo}}" width="50" height="50">
+            </td>
             <td th:text="${p.nom}"></td>
             <td th:text="${p.prix}"></td>
             <td th:text="${p.quantite}"></td>

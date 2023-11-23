@@ -27,21 +27,27 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <h1 class="text-center">Ajout Produit</h1>
+            <div class="alert alert-danger d-none"  id="customAlert" role="alert" >
+                Erreur de validation !!!!!
+            </div>
+            <form method="post" th:action="@{/save}" id="productForm" enctype="multipart/form-data">
 
-            <form th:action="@{/save}">
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="inputEmail4">Nom Produit</label>
                         <input type="text" class="form-control" id="inputEmail4" placeholder="Nom Produit" name="nom" th:value="${produit.nom}">
+                        <span class="text-danger" th:errors="${produit.nom}"></span>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="inputPassword4">Prix</label>
                         <input type="currency" class="form-control" id="inputPassword4" name="prix" placeholder="Prix" th:value="${produit.prix}">
+                        <span class="text-danger" th:errors="${produit.prix}"></span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputAddress">Quantité</label>
                     <input type="text" class="form-control" id="inputAddress" name="quantite" placeholder="Quantite" th:value="${produit.quantite}">
+                    <span class="text-danger" th:errors="${produit.quantite}"></span>
                 </div>
                 <div class="form-group">
                     <div class="col-auto my-1">
@@ -50,9 +56,14 @@
                             <option th:each="c:${categories}" th:text="${c.nom}" th:value="${c.id}"
                             th:selected="${produit.categorie!=null && produit.categorie.id== c.id}"></option>
                         </select>
+
                     </div>
+                    <span class="text-danger" th:errors="${produit.categorie.nom}"></span>
                 </div>
                 <div class="form-group">
+                <label class="mr-sm-2" for="inlineFormCustomSelect">choisir image : </label>
+                    <input type="file" accept="image/*" name="f">
+                    <input type="hidden" name="photo" th:value="${produit.photo}">
                 </div>
                 <br>
                 <input type="hidden" name="id" th:value="${produit.id}">
@@ -61,6 +72,22 @@
         </div>
     </div>
 </div>
+<script>
+    // Add this script to handle the form submission and show/hide the custom alert
+    document.getElementById('productForm').addEventListener('submit', function(event) {
+        // You can add your validation logic here
+        var isValid = true; // Replace this with your actual validation logic
+
+        if (!isValid) {
+            // If validation fails, prevent the form submission and show the custom alert
+            event.preventDefault();
+            document.getElementById('customAlert').classList.remove('d-none');
+        } else {
+            // If validation passes, you can hide the custom alert if it was previously shown
+            document.getElementById('customAlert').classList.add('d-none');
+        }
+    });
+</script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
