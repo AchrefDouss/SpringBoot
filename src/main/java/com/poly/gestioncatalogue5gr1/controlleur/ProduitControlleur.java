@@ -67,6 +67,9 @@ public class ProduitControlleur {
         m.addAttribute("produit", serviceProduit.getProduct(id));
         m.addAttribute("categories" , serviceCategory.getAllCategories());
         return "ajoutProd";
-
+    }
+    @GetMapping("/")
+    public String home(){
+        return "redirect:/index";
     }
 }
