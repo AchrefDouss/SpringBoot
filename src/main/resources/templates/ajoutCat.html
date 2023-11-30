@@ -15,18 +15,22 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-            <a class="navbar-brand" href="/index2">Categories</a>
-            <a class="navbar-brand" href="/index">Produits</a>
+            <a class="navbar-brand" href="/user/index2">Categories</a>
+            <a class="navbar-brand" href="/user/index">Produits</a>
 
         </div>
     </div>
+    <form method="post" th:action="@{/logout}">
+        <button type="submit" class="btn btn-danger btn-sm">logout</button>
+
+    </form>
 </nav>
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <h1 class="text-center">Ajout Categorie</h1>
 
-            <form th:action="@{/add}">
+            <form th:action="@{/admin/add}">
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="inputEmail4">Nom Categorie</label>

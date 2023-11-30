@@ -24,7 +24,7 @@ public class ProduitControlleur {
     private IServiceProduit serviceProduit;
     private IServiceCategory serviceCategory;
 
-    @GetMapping("/index")
+    @GetMapping("/user/index")
     public String getAllProducts(Model m , @RequestParam(name = "page",defaultValue = "1") int page,
     @RequestParam(name="size",defaultValue = "5")int size
         ,@RequestParam(name = "mc",defaultValue = "")String mc){
@@ -37,12 +37,12 @@ public class ProduitControlleur {
          m.addAttribute("produits", listePage);
         return "vue";
     }
-    @GetMapping("/delete/{id}")
+    @GetMapping("/admin/delete/{id}")
     public String deleteProduct(@PathVariable("id") Long id){
         serviceProduit.deleteProduct(id);
-        return "redirect:/index";
+        return "redirect:/user/index";
     }
-    @GetMapping("/formproduit")
+    @GetMapping("/admin/formproduit")
     public String formAjout(Model m){
 
 
@@ -51,7 +51,7 @@ public class ProduitControlleur {
         return "ajoutProd";
     }
 
-    @PostMapping("/save")
+    @PostMapping("/admin/save")
     public String saveProduct(@Valid Produit p, BindingResult bindingResult, Model m, @RequestParam("f") MultipartFile mf) throws IOException {
 
         if(bindingResult.hasErrors()){
@@ -59,10 +59,10 @@ public class ProduitControlleur {
             return "ajoutProd";
         }
         serviceProduit.saveProduct(p,mf);
-        return "redirect:/index";
+        return "redirect:/user/index";
     }
 
-    @GetMapping("/edit/{id}")
+    @GetMapping("/admin/edit/{id}")
     public String editProduct(@PathVariable Long id , Model m){
         m.addAttribute("produit", serviceProduit.getProduct(id));
         m.addAttribute("categories" , serviceCategory.getAllCategories());
@@ -70,6 +70,6 @@ public class ProduitControlleur {
     }
     @GetMapping("/")
     public String home(){
-        return "redirect:/index";
+        return "redirect:/user/index";
     }
 }

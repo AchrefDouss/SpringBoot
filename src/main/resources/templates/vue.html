@@ -16,17 +16,22 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-            <a class="navbar-brand" href="/index">Produits</a>
+            <a class="navbar-brand" href="/user/index">Produits</a>
 
-            <a class="navbar-brand" href="/index2">Categories</a>
+            <a class="navbar-brand" href="/user/index2">Categories</a>
 
         </div>
     </div>
+    <h2 th:text="${#authentication.name}" class="text-bg-light"></h2>
+    <form method="post" th:action="@{/logout}">
+        <button type="submit" class="btn btn-danger btn-sm">logout</button>
+
+    </form>
 </nav>
 <div class="container mt-5">
-    <a href="/formproduit" class="btn btn-success fa fa-plus float-right"></a>
+    <a href="/admin/formproduit" class="btn btn-success fa fa-plus float-right" th:if="${#authorization.expression('hasRole(''ADMIN'')')}"></a>
         <div class="mb-4">
-            <form class="form-inline" action="/index">
+            <form class="form-inline" action="/user/index">
                 <div class="form-group mx-sm-3 mb-2">
                     <input type="text" class="form-control" id="searchInput" placeholder="Search" name="mc" th:value="${mc}">
                 </div>
@@ -58,9 +63,9 @@
             <td th:text="${p.prix}"></td>
             <td th:text="${p.quantite}"></td>
             <td th:text="${p.categorie.nom}"></td>
-            <td>
-               <a th:href="@{'/delete/'+${p.id}}" class="btn btn-danger fa fa-trash"></a>
-                <a th:href="@{/edit/{id}(id=${p.id})}" class="btn btn-warning fa fa-edit"></a>
+            <td th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+               <a th:href="@{'/admin/delete/'+${p.id}}" class="btn btn-danger fa fa-trash"></a>
+                <a th:href="@{/admin/edit/{id}(id=${p.id})}" class="btn btn-warning fa fa-edit"></a>
             </td>
         </tr>
         </tbody>
@@ -68,7 +73,7 @@
     </table>
     <ul class="nav nav-pills">
         <li th:each="i,c:${pages}">
-            <a th:href="@{/index(page=${c.count},mc=${mc})}"
+            <a th:href="@{/user/index(page=${c.count},mc=${mc})}"
                th:text="${c.count}" th:class="${current==c.count-1}?'btn btn-primary mx-2':'btn btn-outline-primary mx2'"></a>
         </li>
     </ul>

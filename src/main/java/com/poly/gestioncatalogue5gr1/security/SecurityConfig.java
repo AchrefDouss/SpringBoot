@@ -30,7 +30,8 @@ public class SecurityConfig {
 
     SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.formLogin(f->f.permitAll());
-
+httpSecurity.authorizeHttpRequests(ar->ar.requestMatchers("/user/**").hasRole("USER"));
+httpSecurity.authorizeHttpRequests(ar->ar.requestMatchers("/admin/**").hasRole("ADMIN"));
          httpSecurity.authorizeHttpRequests(ar->ar.anyRequest().authenticated());
          return httpSecurity.build();
     }

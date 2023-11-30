@@ -18,31 +18,31 @@ import java.util.List;
 public class CategorieControlleur {
     private IServiceCategory serviceCategory;
 
-    @GetMapping("/index2")
+    @GetMapping("/user/index2")
     public String getAllCategories(Model m, @RequestParam(name="mc",defaultValue = "") String mc){
         List<Categorie> liste = serviceCategory.getCategoriesByMC(mc);
         m.addAttribute("categories",liste);
         return "vuecat";
     }
-    @GetMapping("/deleteCat/{id}")
+    @GetMapping("/admin/deleteCat/{id}")
     public String deleteCategory(@PathVariable("id") Long id){
         serviceCategory.deleteCategorie(id);
-        return "redirect:/index2";
+        return "redirect:/user/index2";
     }
-    @GetMapping("/formcategorie")
+    @GetMapping("/admin/formcategorie")
     public String formAjouter(Model m){
             m.addAttribute("categorie",new Categorie());
             return "ajoutCat";
     }
 
-    @GetMapping("/add")
+    @GetMapping("/admin/add")
     public String saveCategorie(@ModelAttribute Categorie c, Model m)
     {
         serviceCategory.saveCategory(c);
-        return "redirect:/index2";
+        return "redirect:/user/index2";
     }
 
-    @GetMapping("/editcat/{id}")
+    @GetMapping("/admin/editcat/{id}")
     public String editCategorie(@PathVariable("id") Long id,Model m){
 
         m.addAttribute("categorie",serviceCategory.getCategorie(id));

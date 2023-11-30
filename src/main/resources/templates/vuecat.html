@@ -16,17 +16,22 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-            <a class="navbar-brand" href="/index2">Categories</a>
-            <a class="navbar-brand" href="/index">Produits</a>
+            <a class="navbar-brand" href="/user/index2">Categories</a>
+            <a class="navbar-brand" href="/user/index">Produits</a>
 
         </div>
     </div>
+    <h2 th:text="${#authentication.name}" class="text-bg-light"></h2>
+    <form method="post" th:action="@{/logout}">
+        <button type="submit" class="btn btn-danger btn-sm">logout</button>
+
+    </form>
 </nav>
 
 <div class="container mt-5">
-    <a href="/formcategorie" class="btn btn-success fa fa-plus float-right"></a>
+    <a href="/admin/formcategorie" class="btn btn-success fa fa-plus float-right" th:if="${#authorization.expression('hasRole(''ADMIN'')')}"></a>
     <div class="mb-4">
-        <form class="form-inline" action="/index2">
+        <form class="form-inline" action="/user/index2">
             <div class="form-group mx-sm-3 mb-2">
                 <input type="text" class="form-control" id="searchInput" placeholder="Search" name="mc">
             </div>
@@ -38,17 +43,17 @@
         <tr>
             <th>#</th>
             <th>Name</th>
-            <th>Actions</th> <!-- Added Actions column for delete button -->
+            <th th:if="${#authorization.expression('hasRole(''ADMIN'')')}">Actions</th> <!-- Added Actions column for delete button -->
         </tr>
         </thead>
         <tbody>
         <tr th:each="c, rowStat : ${categories}">
             <td th:text="${rowStat.index + 1}"></td>
             <td th:text="${c.nom}"></td>
-            <td>
+            <td th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
 
-                <a th:href="@{'/deleteCat/'+${c.id}}" class="btn btn-danger fa fa-trash"></a>
-                <a th:href="@{/editcat/{id}(id=${c.id})}" class="btn btn-warning fa fa-edit"></a>
+                <a th:href="@{'/admin/deleteCat/'+${c.id}}" class="btn btn-danger fa fa-trash"></a>
+                <a th:href="@{/admin/editcat/{id}(id=${c.id})}" class="btn btn-warning fa fa-edit"></a>
             </td>
         </tr>
         </tbody>
