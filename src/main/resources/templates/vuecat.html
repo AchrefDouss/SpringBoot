@@ -29,7 +29,7 @@
 </nav>
 
 <div class="container mt-5">
-    <a href="/admin/formcategorie" class="btn btn-success fa fa-plus float-right" th:if="${#authorization.expression('hasRole(''ADMIN'')')}"></a>
+    <a href="/admin/formcategorie" class="btn btn-success fa fa-plus float-right" th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}"></a>
     <div class="mb-4">
         <form class="form-inline" action="/user/index2">
             <div class="form-group mx-sm-3 mb-2">
@@ -43,14 +43,14 @@
         <tr>
             <th>#</th>
             <th>Name</th>
-            <th th:if="${#authorization.expression('hasRole(''ADMIN'')')}">Actions</th> <!-- Added Actions column for delete button -->
+            <th th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}">Actions</th> <!-- Added Actions column for delete button -->
         </tr>
         </thead>
         <tbody>
         <tr th:each="c, rowStat : ${categories}">
             <td th:text="${rowStat.index + 1}"></td>
             <td th:text="${c.nom}"></td>
-            <td th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+            <td th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}">
 
                 <a th:href="@{'/admin/deleteCat/'+${c.id}}" class="btn btn-danger fa fa-trash"></a>
                 <a th:href="@{/admin/editcat/{id}(id=${c.id})}" class="btn btn-warning fa fa-edit"></a>

@@ -29,7 +29,7 @@
     </form>
 </nav>
 <div class="container mt-5">
-    <a href="/admin/formproduit" class="btn btn-success fa fa-plus float-right" th:if="${#authorization.expression('hasRole(''ADMIN'')')}"></a>
+    <a href="/admin/formproduit" class="btn btn-success fa fa-plus float-right" th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}"></a>
         <div class="mb-4">
             <form class="form-inline" action="/user/index">
                 <div class="form-group mx-sm-3 mb-2">
@@ -63,7 +63,7 @@
             <td th:text="${p.prix}"></td>
             <td th:text="${p.quantite}"></td>
             <td th:text="${p.categorie.nom}"></td>
-            <td th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+            <td th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}">
                <a th:href="@{'/admin/delete/'+${p.id}}" class="btn btn-danger fa fa-trash"></a>
                 <a th:href="@{/admin/edit/{id}(id=${p.id})}" class="btn btn-warning fa fa-edit"></a>
             </td>
