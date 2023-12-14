@@ -1,5 +1,6 @@
 package com.poly.gestioncatalogue5gr1.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,6 +18,7 @@ public class Categorie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nom;
+    @JsonIgnore
     @OneToMany(mappedBy ="categorie",cascade = CascadeType.ALL)
     List<Produit> produits;
 }
