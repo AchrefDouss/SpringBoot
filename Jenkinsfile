@@ -1,29 +1,40 @@
 pipeline {
-    agent any
-    triggers {
-        pollSCM('*/5 * * * *') // Vérifier toutes les 5 minutes
-    }
-    stages {
-        stage('Checkout') {
-            steps {
-                echo "Récupération du code source"
-                checkout scm
-            }
-        }
-        stage('Build') {
-            steps {
-                echo "Build du projet"
-
-               // sh './mvnw clean package'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo "Déploiement du projet"
-
-                // Commandes de déploiement pour un projet Spring Boot
-               // sh 'java -jar target/gestionCatalogue5Gr1.jar'
-            }
-        }
-    }
+agent any
+environment {
+// Ajouter la variable dh_cred comme variables d'authentification
+DOCKERHUB_CREDENTIALS = credentials('dh_cred')
+}
+triggers {
+pollSCM('*/5 * * * *') // Vérifier toutes les 5 minutes
+}
+stages {
+stage('Checkout'){
+agent any
+steps{
+checkout scm
+}
+}
+stage('Init'){
+steps{
+// Permet l'authentification
+sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+}
+}
+stage('Build'){
+steps {
+sh 'docker build -t $DOCKERHUB_CREDENTIALS_USR/springbootapp:$BUILD_ID .'
+}
+}
+stage('Deliver'){
+steps {
+sh 'docker push $DOCKERHUB_CREDENTIALS_USR/espringbootapp:$BUILD_ID'
+}
+}
+stage('Cleanup'){
+steps {
+sh 'docker rmi $DOCKERHUB_CREDENTIALS_USR/springbootapp:$BUILD_ID'
+sh 'docker logout'
+}
+}
+}
 }
