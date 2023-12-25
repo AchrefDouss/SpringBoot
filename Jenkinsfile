@@ -1,4 +1,8 @@
 pipeline {
+options {
+    timeout(time: 10, unit: 'MINUTES') // Set a longer timeout as needed
+}
+
 agent any
 environment {
 // Ajouter la variable dh_cred comme variables d'authentification
