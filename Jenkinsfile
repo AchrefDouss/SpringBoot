@@ -31,7 +31,7 @@ sh 'docker build -t $DOCKERHUB_CREDENTIALS_USR/springbootapp:$BUILD_ID .'
 }
 stage('Deliver'){
 steps {
-sh 'docker push $DOCKERHUB_CREDENTIALS_USR/espringbootapp:$BUILD_ID'
+sh 'docker push $DOCKERHUB_CREDENTIALS_USR/springbootapp:$BUILD_ID'
 }
 }
 stage('Cleanup'){
