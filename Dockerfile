@@ -1,10 +1,10 @@
 
-FROM openjdk:11-jre-slim
+FROM openjdk:17-jdk-slim
 
 WORKDIR /app
 
-COPY /out/artifacts/gestionCatalogue5Gr1_jar/GestionCatalogue5Gr1Application.jar /app/app.jar
+COPY out/artifacts/gestionCatalogue5Gr1_jar/gestionCatalogue5Gr1.jar /app/gestionCatalogue5Gr1.jar
 
 EXPOSE 8080
 
-CMD ["java","-jar","app.jar"]
+CMD ["java","-jar","gestionCatalogue5Gr1.jar"]

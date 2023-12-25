@@ -1,0 +1,9 @@
+version: '3'
+services:
+  app:
+    image: achrefdo/springbootapp
+    container_name: springbootapp
+    volumes:
+      - ./catalogue5DNI2.db:/app/catalogue5DNI2.db
+    ports:
+      - "8888:8080"
