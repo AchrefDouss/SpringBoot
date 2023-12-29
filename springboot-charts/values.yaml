@@ -40,13 +40,7 @@ securityContext: {}
   # runAsUser: 1000
 
 service:
-  nodePort:
-    enabled: true
-    port: 30000
-    targetPort: 8888
-
-loadBalancer:
-  enabled: false
+  type: NodePort
   port: 8888
 
 ingress:
