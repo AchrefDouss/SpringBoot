@@ -8,7 +8,7 @@ image:
   repository: achrefdo/springbootapp
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: "latest"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -40,7 +40,13 @@ securityContext: {}
   # runAsUser: 1000
 
 service:
-  type: NodePort
+  nodePort:
+    enabled: true
+    port: 30000
+    targetPort: 8888
+
+loadBalancer:
+  enabled: false
   port: 8888
 
 ingress:

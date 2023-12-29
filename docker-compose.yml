@@ -6,4 +6,4 @@ services:
     volumes:
       - ./catalogue5DNI2.db:/app/catalogue5DNI2.db
     ports:
-      - "8888:8080"
+      - "8888:8888"
