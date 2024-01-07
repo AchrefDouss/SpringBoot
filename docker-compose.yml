@@ -3,7 +3,18 @@ services:
   app:
     image: achrefdo/springbootapp
     container_name: springbootapp
-    volumes:
-      - ./catalogue5DNI2.db:/app/catalogue5DNI2.db
     ports:
       - "8888:8888"
+    environment:
+      - SPRING_DATASOURCE_URL:dbc:mysql://db:3306/catalogue5DNI2
+    depends_on:
+      - db
+  db:
+    container_name: db
+    image: mysql:latest
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_DATABASE=catalogue5DNI2
+      - MYSQL_USER=root
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
