@@ -6,7 +6,7 @@ services:
     ports:
       - "8888:8888"
     environment:
-      - SPRING_DATASOURCE_URL:dbc:mysql://db:3306/catalogue5DNI2
+      - SPRING_DATASOURCE_URL:jdbc:mysql://db:3306/catalogue5DNI2
     depends_on:
       - db
   db:
